@@ -43,8 +43,11 @@
       align-items: center;
       display: flex;
       gap: 14px;
-      justify-content: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 16px 24px;
+      width: 100%;
     }
     .nav-container::before {
       content: "";
@@ -56,36 +59,39 @@
       margin-right: 6px;
       width: 32px;
     }
-    nav a {
-      border: 1px solid transparent;
-      border-radius: 999px;
-      color: var(--text-main);
-      display: inline-flex;
-      font-size: 0.95rem;
+    .nav-title {
+      font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 0.01em;
-      padding: 10px 20px;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
-    nav a:hover {
+    .translate-widget {
+      align-items: center;
       background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      display: inline-flex;
+      padding: 6px 12px;
     }
-    nav a.active {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 10px 24px rgba(245, 180, 0, 0.3);
-      color: #101010;
+    .translate-widget select {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-weight: 600;
+      outline: none;
+    }
+    .translate-widget .goog-te-gadget {
+      color: var(--text-main);
+      font-size: 0.85rem;
+    }
+    .translate-widget .goog-te-gadget span {
+      color: var(--text-main);
+    }
+    .translate-widget .goog-te-gadget img {
+      display: none;
     }
     main {
       padding: 32px 16px 48px;
-    }
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
     }
     .form-shell {
       background: var(--surface);
@@ -123,6 +129,12 @@
     @media (max-width: 900px) {
       .nav-container {
         flex-wrap: wrap;
+        justify-content: center;
+      }
+      .translate-widget {
+        order: 3;
+        width: 100%;
+        justify-content: center;
       }
       .form-shell {
         padding: 16px;
@@ -136,10 +148,6 @@
       .nav-container {
         flex-direction: column;
       }
-      nav a {
-        width: 100%;
-        justify-content: center;
-      }
       .form-shell h1 {
         font-size: 1.35rem;
       }
@@ -149,45 +157,27 @@
 <body>
   <nav>
     <div class="nav-container">
-      <a href="#formEspañol" class="tab-link active" onclick="openTab(event, 'formEspañol')">Formulario en español</a>
-      <a href="#formIngles" class="tab-link" onclick="openTab(event, 'formIngles')">English Form</a>
+      <span class="nav-title">Sumate BCH</span>
+      <div id="google_translate_element" class="translate-widget" aria-label="Google Translate Selector"></div>
     </div>
   </nav>
   <main>
-    <div class="tab-content active" id="formEspañol">
-      <div class="form-shell">
-        <header>
-          <h1>Sumate a la comunidad BCH</h1>
-          <p>Completá el formulario y recibí novedades sobre eventos, proyectos y oportunidades.</p>
-        </header>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español"></iframe>
-      </div>
-    </div>
-    <div class="tab-content" id="formIngles">
-      <div class="form-shell">
-        <header>
-          <h1>Join the BCH community</h1>
-          <p>Fill out the form to hear about events, projects, and new opportunities.</p>
-        </header>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl31CtP_-eQsDEQKAY8i1Kg7LfdPt3XG0399415uylWGMKxA/viewform?embedded=true" title="English Form"></iframe>
-      </div>
+    <div class="form-shell">
+      <header>
+        <h1>Sumate a la comunidad BCH</h1>
+        <p>Completá el formulario y traducilo al idioma que prefieras con Google Translate.</p>
+      </header>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español"></iframe>
     </div>
   </main>
   <script>
-    function openTab(event, tabId) {
-      var tabContents = document.getElementsByClassName('tab-content');
-      for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove('active');
-      }
-      var tabLinks = document.getElementsByClassName('tab-link');
-      for (var i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].classList.remove('active');
-      }
-      document.getElementById(tabId).classList.add('active');
-      var activeLink = document.querySelector('.tab-link[href="#' + tabId + '"]');
-      activeLink.classList.add('active');
-      event.preventDefault();
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'es', includedLanguages: 'en,pt,fr,it,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+        'google_translate_element'
+      );
     }
   </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
