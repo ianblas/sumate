@@ -1,100 +1,230 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sumate BCH</title>
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/bchargentina/bchargentina.github.io/main/bcharg.png">
-  <style>
-    body {
-      background-color: #1d3744;
-      color: #333;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    nav {
-      background-color: #e0e0e0;
-      padding: 10px 0;
-      text-align: center;
-    }
-    nav .nav-container {
-      display: inline-block;
-    }
-    nav a {
-      background-color: #ccc;
-      border-radius: 15px;
-      color: #333;
-      display: inline-block;
-      margin: 0 10px;
-      padding: 10px 20px;
-      text-decoration: none;
-    }
-    nav a.active {
-      background-color: #777;
-      color: #fff;
-    }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      text-align: center;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    iframe {
-      width: 100%;
-      height: calc(100vh - 50px);
-      border: none;
-    }
-    @media (max-width: 768px) {
-      nav {
-        padding: 10px;
-        text-align: center;
-      }
-      nav a {
-        display: block;
-        margin-bottom: 10px;
-        padding: 10px;
-        text-align: center;
-        width: calc(100% - 20px);
-      }
-      nav .nav-container {
-        text-align: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumate a Bitcoin Cash Argentina</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/bchargentina/bchargentina.github.io/main/bcharg.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0AC18E;
+            --primary-hover: #08a87b;
+            --bg-color: #0b1a26;
+            --card-bg: #142533;
+            --text-color: #f0f0f0;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-y: scroll; /* Force single scrollbar */
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-link {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+
+        .tab-link:hover {
+            background-color: rgba(10, 193, 142, 0.1);
+        }
+
+        .tab-link.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        iframe {
+            width: 100%;
+            border: none;
+            background: transparent;
+            /* Height is set large to prevent inner scrollbar */
+            height: 2800px;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .tab-link {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            main {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <a href="#formEspañol" class="tab-link active" onclick="openTab('formEspañol')">Formulario en español</a>
-      <a href="#formIngles" class="tab-link" onclick="openTab('formIngles')">English Form</a>
-    </div>
-  </nav>
-  <main>
-    <div class="tab-content active" id="formEspañol">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español"></iframe>
-    </div>
-    <div class="tab-content" id="formIngles">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl31CtP_-eQsDEQKAY8i1Kg7LfdPt3XG0399415uylWGMKxA/viewform?embedded=true" title="English Form"></iframe>
-    </div>
-  </main>
-  <script>
-    function openTab(tabId) {
-      var tabContents = document.getElementsByClassName('tab-content');
-      for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove('active');
-      }
-      var tabLinks = document.getElementsByClassName('tab-link');
-      for (var i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].classList.remove('active');
-      }
-      document.getElementById(tabId).classList.add('active');
-      var activeLink = document.querySelector('.tab-link[href="#' + tabId + '"]');
-      activeLink.classList.add('active');
-      event.preventDefault();
-    }
-  </script>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/bchargentina/bchargentina.github.io/main/bcharg.png" alt="BCH Argentina Logo">
+            <h1>Sumate BCH</h1>
+        </div>
+        <nav>
+            <div class="nav-container">
+                <a href="#formEspañol" class="tab-link active" onclick="openTab('formEspañol', event)">Español</a>
+                <a href="#formIngles" class="tab-link" onclick="openTab('formIngles', event)">English</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tab-content active" id="formEspañol">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español" scrolling="no"></iframe>
+        </div>
+        <div class="tab-content" id="formIngles">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl31CtP_-eQsDEQKAY8i1Kg7LfdPt3XG0399415uylWGMKxA/viewform?embedded=true" title="English Form" scrolling="no"></iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Bitcoin Cash Argentina. Todos los derechos reservados.</p>
+        <p>Promoviendo la adopción de Bitcoin Cash como dinero electrónico P2P.</p>
+    </footer>
+
+    <script>
+        function openTab(tabId, event) {
+            if(event) event.preventDefault();
+
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Remove active class from all links
+            var tabLinks = document.getElementsByClassName('tab-link');
+            for (var i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove('active');
+            }
+
+            // Show current tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to current link
+            // If the function was called via click, event.target is the element.
+            // If we want to be safe and find it by href matching the tabId:
+            var activeLink = document.querySelector('.tab-link[href="#' + tabId + '"]');
+            if (activeLink) activeLink.classList.add('active');
+        }
+
+        // Handle hash in URL on load
+        window.onload = function() {
+            var hash = window.location.hash.substring(1);
+            if (hash === 'formIngles') {
+                openTab('formIngles');
+            } else {
+                openTab('formEspañol');
+            }
+        };
+    </script>
 </body>
 </html>
