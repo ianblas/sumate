@@ -5,62 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sumate BCH</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/bchargentina/bchargentina.github.io/main/bcharg.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      color-scheme: dark;
+      --bg-deep: #0b1620;
+      --bg-mid: #0f2733;
+      --accent: #f5b400;
+      --accent-strong: #ffcb45;
+      --text-main: #f4f7fb;
+      --text-muted: rgba(244, 247, 251, 0.7);
+      --surface: rgba(19, 41, 53, 0.8);
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      background-color: #1d3744;
-      color: #333;
-      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1c3c4d 0%, #0b1721 40%, #091018 100%);
+      color: var(--text-main);
+      font-family: "Inter", "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
+      min-height: 100vh;
     }
     nav {
-      background-color: #e0e0e0;
-      padding: 10px 0;
-      text-align: center;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 14, 20, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    nav .nav-container {
-      display: inline-block;
+    .nav-container {
+      align-items: center;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      padding: 16px 24px;
+    }
+    .nav-container::before {
+      content: "";
+      background-image: url("https://raw.githubusercontent.com/bchargentina/bchargentina.github.io/main/bcharg.png");
+      background-size: cover;
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+      height: 32px;
+      margin-right: 6px;
+      width: 32px;
     }
     nav a {
-      background-color: #ccc;
-      border-radius: 15px;
-      color: #333;
-      display: inline-block;
-      margin: 0 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--text-main);
+      display: inline-flex;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
       padding: 10px 20px;
       text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     nav a.active {
-      background-color: #777;
-      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 24px rgba(245, 180, 0, 0.3);
+      color: #101010;
+    }
+    main {
+      padding: 32px 16px 48px;
     }
     .tab-content {
       display: none;
-      padding: 20px;
-      text-align: center;
     }
     .tab-content.active {
       display: block;
     }
-    iframe {
-      width: 100%;
-      height: calc(100vh - 50px);
-      border: none;
+    .form-shell {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      margin: 0 auto;
+      max-width: 1200px;
+      overflow: hidden;
+      padding: 20px;
     }
-    @media (max-width: 768px) {
-      nav {
-        padding: 10px;
-        text-align: center;
+    .form-shell header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .form-shell h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+    .form-shell p {
+      color: var(--text-muted);
+      margin: 0;
+    }
+    iframe {
+      border: none;
+      border-radius: 16px;
+      height: 72vh;
+      min-height: 560px;
+      width: 100%;
+    }
+    @media (max-width: 900px) {
+      .nav-container {
+        flex-wrap: wrap;
+      }
+      .form-shell {
+        padding: 16px;
+      }
+      iframe {
+        height: 70vh;
+        min-height: 480px;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
       }
       nav a {
-        display: block;
-        margin-bottom: 10px;
-        padding: 10px;
-        text-align: center;
-        width: calc(100% - 20px);
+        width: 100%;
+        justify-content: center;
       }
-      nav .nav-container {
-        text-align: center;
+      .form-shell h1 {
+        font-size: 1.35rem;
       }
     }
   </style>
@@ -68,20 +148,32 @@
 <body>
   <nav>
     <div class="nav-container">
-      <a href="#formEspañol" class="tab-link active" onclick="openTab('formEspañol')">Formulario en español</a>
-      <a href="#formIngles" class="tab-link" onclick="openTab('formIngles')">English Form</a>
+      <a href="#formEspañol" class="tab-link active" onclick="openTab(event, 'formEspañol')">Formulario en español</a>
+      <a href="#formIngles" class="tab-link" onclick="openTab(event, 'formIngles')">English Form</a>
     </div>
   </nav>
   <main>
     <div class="tab-content active" id="formEspañol">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español"></iframe>
+      <div class="form-shell">
+        <header>
+          <h1>Sumate a la comunidad BCH</h1>
+          <p>Completá el formulario y recibí novedades sobre eventos, proyectos y oportunidades.</p>
+        </header>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7umVo3A94hkcTMxriRiCNPYJ2MRL0crns5sBaQnHjoTWrSg/viewform?embedded=true" title="Formulario en Español"></iframe>
+      </div>
     </div>
     <div class="tab-content" id="formIngles">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl31CtP_-eQsDEQKAY8i1Kg7LfdPt3XG0399415uylWGMKxA/viewform?embedded=true" title="English Form"></iframe>
+      <div class="form-shell">
+        <header>
+          <h1>Join the BCH community</h1>
+          <p>Fill out the form to hear about events, projects, and new opportunities.</p>
+        </header>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfl31CtP_-eQsDEQKAY8i1Kg7LfdPt3XG0399415uylWGMKxA/viewform?embedded=true" title="English Form"></iframe>
+      </div>
     </div>
   </main>
   <script>
-    function openTab(tabId) {
+    function openTab(event, tabId) {
       var tabContents = document.getElementsByClassName('tab-content');
       for (var i = 0; i < tabContents.length; i++) {
         tabContents[i].classList.remove('active');
